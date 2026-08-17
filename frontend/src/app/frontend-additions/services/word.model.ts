@@ -6,7 +6,6 @@ export interface QuizQuestion {
   choices: string[];
   category: string;
   image: string;
-  hint?: string;
 }
 
 export interface CheckAnswerResponse {

@@ -18,9 +18,8 @@
 
     <p class="eyebrow">{{ question()?.category }}</p>
 
-    <div class="question-image" role="img" [attr.aria-label]="question()?.category">{{ question()?.image }}</div>
+    <img class="question-image" [src]="question()?.image" [alt]="question()?.category" />
     <h1 class="thai-word">{{ question()?.thai?.join(', ') }}</h1>
-    <p class="term-hint" *ngIf="question()?.hint">คำใบ้: {{ question()?.hint }}</p>
 
     <p class="hint">เลือกคำศัพท์ภาษาอังกฤษที่ตรงกับคำถาม</p>
 

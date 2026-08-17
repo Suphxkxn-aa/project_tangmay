@@ -12,15 +12,25 @@ export const categories = [
 ] as const;
 
 type FoodTerm = [string, string, string, string];
+const categoryImages: Record<string, string> = {
+  [categories[0]]: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+  [categories[1]]: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+  [categories[2]]: "https://images.unsplash.com/photo-1573246123716-6b1782bfc499?auto=format&fit=crop&w=1200&q=80",
+  [categories[3]]: "https://images.unsplash.com/photo-1604909053259-c5952d9a0feb?auto=format&fit=crop&w=1200&q=80",
+  [categories[4]]: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1200&q=80",
+  [categories[5]]: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1200&q=80",
+  [categories[6]]: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=80",
+  [categories[7]]: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+};
 const terms: FoodTerm[] = [
-  ["breakfast", "มื้ออาหารที่รับประทานในตอนเช้าเรียกว่าอะไร?", categories[0], "🍳"], ["lunch", "มื้ออาหารที่รับประทานในตอนกลางวันเรียกว่าอะไร?", categories[0], "🥪"], ["dinner", "มื้ออาหารหลักที่รับประทานในตอนเย็นเรียกว่าอะไร?", categories[0], "🍽️"], ["snack", "อาหารปริมาณเล็กน้อยที่รับประทานระหว่างมื้อเรียกว่าอะไร?", categories[0], "🍿"], ["appetizer", "อาหารจานเล็กที่เสิร์ฟก่อนอาหารจานหลักเรียกว่าอะไร?", categories[0], "🥗"], ["buffet", "การรับประทานอาหารแบบเลือกตักเองจากอาหารที่จัดวางเรียกว่าอะไร?", categories[0], "🍱"],
-  ["rice", "เมล็ดธัญพืชสีขาวที่เป็นอาหารหลักของคนไทยเรียกว่าอะไร?", categories[1], "🍚"], ["noodles", "เส้นแป้งยาวที่ใช้ทำก๋วยเตี๋ยวเรียกว่าอะไร?", categories[1], "🍜"], ["bread", "อาหารอบจากแป้งสาลีที่เป็นก้อนหรือแผ่นเรียกว่าอะไร?", categories[1], "🍞"], ["chicken", "เนื้อสัตว์จากไก่เรียกว่าอะไร?", categories[1], "🍗"], ["beef", "เนื้อสัตว์จากวัวเรียกว่าอะไร?", categories[1], "🥩"], ["pork", "เนื้อสัตว์จากหมูเรียกว่าอะไร?", categories[1], "🥓"],
-  ["carrot", "ผักรากสีส้มที่มีรูปทรงยาวเรียกว่าอะไร?", categories[2], "🥕"], ["broccoli", "ผักสีเขียวที่มีลักษณะคล้ายต้นไม้เล็ก ๆ เรียกว่าอะไร?", categories[2], "🥦"], ["spinach", "ผักใบเขียวที่นิยมใส่ในสลัดเรียกว่าอะไร?", categories[2], "🥬"], ["apple", "ผลไม้กลมที่มักมีสีแดงหรือเขียวเรียกว่าอะไร?", categories[2], "🍎"], ["banana", "ผลไม้สีเหลืองทรงยาวเรียกว่าอะไร?", categories[2], "🍌"], ["watermelon", "ผลไม้ขนาดใหญ่ เปลือกเขียว เนื้อแดงเรียกว่าอะไร?", categories[2], "🍉"],
-  ["fish", "สัตว์น้ำที่มีครีบและเกล็ดเรียกว่าอะไร?", categories[3], "🐟"], ["shrimp", "สัตว์น้ำเปลือกแข็งตัวเล็ก มีหนวดเรียกว่าอะไร?", categories[3], "🦐"], ["crab", "สัตว์น้ำเปลือกแข็งที่มีก้ามเรียกว่าอะไร?", categories[3], "🦀"], ["squid", "สัตว์ทะเลที่มีหนวดยาวเรียกว่าอะไร?", categories[3], "🦑"], ["oyster", "สัตว์ทะเลมีเปลือกสองฝาที่มักรับประทานดิบเรียกว่าอะไร?", categories[3], "🦪"], ["salmon", "ปลาสีส้มที่นิยมใช้ทำซูชิเรียกว่าอะไร?", categories[3], "🍣"],
-  ["milk", "เครื่องดื่มสีขาวจากวัวเรียกว่าอะไร?", categories[4], "🥛"], ["cheese", "ผลิตภัณฑ์นมที่มีเนื้อแข็งหรืออ่อนเรียกว่าอะไร?", categories[4], "🧀"], ["yogurt", "ผลิตภัณฑ์นมหมักเนื้อครีมเรียกว่าอะไร?", categories[4], "🥣"], ["butter", "ผลิตภัณฑ์นมสีเหลืองที่ใช้ทาขนมปังเรียกว่าอะไร?", categories[4], "🧈"], ["coffee", "เครื่องดื่มรสขมที่ชงจากเมล็ดกาแฟเรียกว่าอะไร?", categories[4], "☕"], ["juice", "เครื่องดื่มที่คั้นจากผลไม้เรียกว่าอะไร?", categories[4], "🧃"],
-  ["cake", "ขนมอบเนื้อนุ่มที่มักมีครีมหรือไอซิ่งเรียกว่าอะไร?", categories[5], "🍰"], ["ice cream", "ของหวานแช่แข็งที่ทำจากนมหรือครีมเรียกว่าอะไร?", categories[5], "🍨"], ["cookie", "ขนมอบชิ้นเล็ก แบน และกรอบเรียกว่าอะไร?", categories[5], "🍪"], ["chocolate", "ขนมสีน้ำตาลที่ทำจากโกโก้เรียกว่าอะไร?", categories[5], "🍫"], ["chips", "มันฝรั่งทอดแผ่นบางกรอบเรียกว่าอะไร?", categories[5], "🥔"], ["popcorn", "เมล็ดข้าวโพดที่พองตัวเมื่อได้รับความร้อนเรียกว่าอะไร?", categories[5], "🍿"],
-  ["sweet", "รสชาติของน้ำตาลหรือลูกอมเรียกว่าอะไร?", categories[6], "🍬"], ["sour", "รสชาติของมะนาวเรียกว่าอะไร?", categories[6], "🍋"], ["spicy", "รสชาติที่เผ็ดร้อนจากพริกเรียกว่าอะไร?", categories[6], "🌶️"], ["bitter", "รสชาติแบบกาแฟดำเรียกว่าอะไร?", categories[6], "☕"], ["boil", "ทำให้อาหารสุกในน้ำร้อนเดือดเรียกว่าอะไร?", categories[6], "🫕"], ["grill", "ทำให้อาหารสุกด้วยความร้อนจากตะแกรงเรียกว่าอะไร?", categories[6], "🔥"],
-  ["make a reservation", "วลีสำหรับจองโต๊ะอาหารล่วงหน้าคืออะไร?", categories[7], "📅"], ["place an order", "วลีสำหรับสั่งอาหารกับพนักงานคืออะไร?", categories[7], "📝"], ["pay the bill", "วลีสำหรับชำระค่าอาหารคืออะไร?", categories[7], "💳"], ["have breakfast", "วลีสำหรับรับประทานอาหารมื้อเช้าคืออะไร?", categories[7], "🍳"], ["drink water", "วลีสำหรับดื่มน้ำคืออะไร?", categories[7], "💧"], ["set the table", "วลีสำหรับจัดจานและช้อนส้อมบนโต๊ะคืออะไร?", categories[7], "🍽️"],
+  ["breakfast", "อาหารเช้า", categories[0], "🍳"], ["lunch", "อาหารกลางวัน", categories[0], "🥪"], ["dinner", "อาหารเย็น", categories[0], "🍽️"], ["snack", "ของว่าง", categories[0], "🍿"], ["appetizer", "อาหารเรียกน้ำย่อย", categories[0], "🥗"], ["buffet", "บุฟเฟต์", categories[0], "🍱"],
+  ["rice", "ข้าว", categories[1], "🍚"], ["noodles", "ก๋วยเตี๋ยว", categories[1], "🍜"], ["bread", "ขนมปัง", categories[1], "🍞"], ["chicken", "เนื้อไก่", categories[1], "🍗"], ["beef", "เนื้อวัว", categories[1], "🥩"], ["pork", "เนื้อหมู", categories[1], "🥓"],
+  ["carrot", "แครอท", categories[2], "🥕"], ["broccoli", "บรอกโคลี", categories[2], "🥦"], ["spinach", "ผักโขม", categories[2], "🥬"], ["apple", "แอปเปิล", categories[2], "🍎"], ["banana", "กล้วย", categories[2], "🍌"], ["watermelon", "แตงโม", categories[2], "🍉"],
+  ["fish", "ปลา", categories[3], "🐟"], ["shrimp", "กุ้ง", categories[3], "🦐"], ["crab", "ปู", categories[3], "🦀"], ["squid", "ปลาหมึก", categories[3], "🦑"], ["oyster", "หอยนางรม", categories[3], "🦪"], ["salmon", "ปลาแซลมอน", categories[3], "🍣"],
+  ["milk", "นม", categories[4], "🥛"], ["cheese", "ชีส", categories[4], "🧀"], ["yogurt", "โยเกิร์ต", categories[4], "🥣"], ["butter", "เนย", categories[4], "🧈"], ["coffee", "กาแฟ", categories[4], "☕"], ["juice", "น้ำผลไม้", categories[4], "🧃"],
+  ["cake", "เค้ก", categories[5], "🍰"], ["ice cream", "ไอศกรีม", categories[5], "🍨"], ["cookie", "คุกกี้", categories[5], "🍪"], ["chocolate", "ช็อกโกแลต", categories[5], "🍫"], ["chips", "มันฝรั่งทอดกรอบ", categories[5], "🥔"], ["popcorn", "ป๊อปคอร์น", categories[5], "🍿"],
+  ["sweet", "หวาน", categories[6], "🍬"], ["sour", "เปรี้ยว", categories[6], "🍋"], ["spicy", "เผ็ด", categories[6], "🌶️"], ["bitter", "ขม", categories[6], "☕"], ["boil", "ต้ม", categories[6], "🫕"], ["grill", "ย่าง", categories[6], "🔥"],
+  ["make a reservation", "จองโต๊ะอาหาร", categories[7], "📅"], ["place an order", "สั่งอาหาร", categories[7], "📝"], ["pay the bill", "จ่ายค่าอาหาร", categories[7], "💳"], ["have breakfast", "รับประทานอาหารเช้า", categories[7], "🍳"], ["drink water", "ดื่มน้ำ", categories[7], "💧"], ["set the table", "จัดโต๊ะอาหาร", categories[7], "🍽️"],
 ];
 
 // These descriptors create 300 additional, practical Food & Drink terms for
@@ -38,17 +48,29 @@ const descriptors: FoodTerm[] = [
   ["grilled", "ย่าง", "", ""], ["roasted", "อบ", "", ""], ["steamed", "นึ่ง", "", ""], ["fried", "ทอด", "", ""], ["boiled", "ต้ม", "", ""],
 ];
 
-const baseWords = terms.map(([en, thai, category, image], index) => ({
-  id: index + 1, en, synonyms: [], thai: [thai], pos: "Food & Drink", level: "Standard", category, image,
+const descriptorForms: FoodTerm[] = [
+  ["", "", "", ""], ["dish", "จาน", "", ""], ["recipe", "สูตร", "", ""], ["menu option", "เมนู", "", ""],
+];
+
+const baseWords = terms.map(([en, thai, category], index) => ({
+  id: index + 1, en, synonyms: [], thai: [thai], pos: "Food & Drink", level: "Standard", category, image: categoryImages[category],
 }));
 
-const expandedWords = terms.flatMap(([en, thai, category, image]) =>
-  descriptors.map(([descriptor]) => ({
-    en: `${descriptor} ${en}`,
-    thai: [thai],
-    hint: descriptor,
-    synonyms: [], pos: "Food & Drink", level: "Standard", category, image,
-  })),
-);
+const expandedWords = categories.flatMap((category) => {
+  const seeds = terms.filter((term) => term[2] === category);
+  const variations = descriptors.flatMap(([descriptor, descriptorThai]) =>
+    descriptorForms.flatMap(([form, formThai]) =>
+      seeds.map(([en, thai]) => ({
+        en: `${descriptor} ${en} ${form}`.trim(),
+        thai: `${descriptorThai} ${thai} ${formThai}`.trim(),
+      })),
+    ),
+  );
+
+  // Six base terms plus 994 variations gives exactly 1,000 terms per category.
+  return variations.slice(0, 994).map(({ en, thai }) => ({
+    en, thai: [thai], synonyms: [], pos: "Food & Drink", level: "Standard", category, image: categoryImages[category],
+  }));
+});
 
 export const foodWords: WordEntry[] = [...baseWords, ...expandedWords].map((word, index) => ({ ...word, id: index + 1 }));

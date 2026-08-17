@@ -19,7 +19,6 @@ function toQuestion(w: WordEntry, pool: WordEntry[]): QuizQuestion {
     level: w.level,
     category: w.category,
     image: w.image,
-    hint: w.hint,
     choices: [w.en, ...distractors].sort(() => Math.random() - 0.5),
   };
 }
