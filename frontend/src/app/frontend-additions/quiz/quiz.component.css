@@ -41,6 +41,30 @@
   text-align: center;
 }
 
+.category-card { padding-bottom: 28px; }
+
+.question-image {
+  align-items: center;
+  background: color-mix(in srgb, var(--green) 10%, white);
+  border-radius: 20px;
+  display: flex;
+  font-size: 72px;
+  height: 120px;
+  justify-content: center;
+  margin: 0 auto 18px;
+  width: 120px;
+}
+
+.change-category {
+  background: transparent;
+  border: 0;
+  color: var(--green-dark);
+  cursor: pointer;
+  font: inherit;
+  margin: 16px 0;
+  text-decoration: underline;
+}
+
 .top-row {
   display: flex;
   align-items: center;

@@ -13,6 +13,12 @@ type AnswerState = 'idle' | 'correct' | 'wrong';
   styleUrl: './quiz.component.css',
 })
 export class QuizComponent implements OnInit {
+  readonly categories = [
+    'I. ประเภทมื้ออาหารและหมวดอาหาร', 'II. อาหารจานหลักและเนื้อสัตว์',
+    'III. ผักและผลไม้', 'IV. อาหารทะเล', 'V. ผลิตภัณฑ์จากนมและเครื่องดื่ม',
+    'VI. ของหวานและของว่าง', 'VII. รสชาติและการปรุงอาหาร', 'VIII. Collocation เกี่ยวกับอาหาร',
+  ];
+  category = signal<string | null>(null);
   question = signal<QuizQuestion | null>(null);
   selectedAnswer = signal('');
   state = signal<AnswerState>('idle');
@@ -24,14 +30,29 @@ export class QuizComponent implements OnInit {
   constructor(private wordService: WordService) {}
 
   ngOnInit(): void {
+    this.loading.set(false);
+  }
+
+  selectCategory(category: string): void {
+    this.category.set(category);
+    this.score.set(0);
+    this.total.set(0);
     this.loadNextQuestion();
+  }
+
+  chooseAnotherCategory(): void {
+    this.question.set(null);
+    this.category.set(null);
+    this.loading.set(false);
   }
 
   loadNextQuestion(): void {
     this.loading.set(true);
     this.state.set('idle');
     this.selectedAnswer.set('');
-    this.wordService.getRandomQuestion().subscribe({
+    const category = this.category();
+    if (!category) return;
+    this.wordService.getRandomQuestion(category).subscribe({
       next: (q) => {
         this.question.set(q);
         this.loading.set(false);

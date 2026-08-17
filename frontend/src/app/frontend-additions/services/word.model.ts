@@ -4,6 +4,8 @@ export interface QuizQuestion {
   pos: string;
   level: string;
   choices: string[];
+  category: string;
+  image: string;
 }
 
 export interface CheckAnswerResponse {

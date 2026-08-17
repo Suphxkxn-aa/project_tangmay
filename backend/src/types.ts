@@ -5,6 +5,8 @@ export interface WordEntry {
   thai: string[];
   pos: string;
   level: string;
+  category: string;
+  image: string;
 }
 
 export interface QuizQuestion {
@@ -13,6 +15,8 @@ export interface QuizQuestion {
   pos: string;
   level: string;
   choices: string[];
+  category: string;
+  image: string;
 }
 
 export interface CheckAnswerBody {

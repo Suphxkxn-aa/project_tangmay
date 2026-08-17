@@ -1,15 +1,27 @@
 <div class="quiz-page">
+  <div class="quiz-card category-card" *ngIf="!category(); else quizTpl">
+    <p class="eyebrow">Food &amp; Drink Vocabulary Quiz</p>
+    <h1 class="thai-word">คุณต้องการทดสอบคำศัพท์จากหมวดหมู่ไหน เลือกหมายเลขหัวข้อได้เลยครับ</h1>
+    <div class="choice-list">
+      <button class="choice-button" *ngFor="let category of categories; let index = index" (click)="selectCategory(category)">
+        <span>{{ index + 1 }}</span>{{ category }}
+      </button>
+    </div>
+  </div>
+
+  <ng-template #quizTpl>
   <div class="quiz-card" *ngIf="!loading(); else loadingTpl">
     <div class="top-row">
       <span class="level-badge">{{ question()?.level }}</span>
       <span class="score">{{ score() }} / {{ total() }}</span>
     </div>
 
-    <p class="eyebrow">Definition</p>
+    <p class="eyebrow">{{ question()?.category }}</p>
 
+    <div class="question-image" role="img" [attr.aria-label]="question()?.category">{{ question()?.image }}</div>
     <h1 class="thai-word">{{ question()?.thai?.join(', ') }}</h1>
 
-    <p class="hint">Choose the Food &amp; Drink term that matches this definition.</p>
+    <p class="hint">เลือกคำศัพท์ภาษาอังกฤษที่ตรงกับคำถาม</p>
 
     <div class="choice-list">
       <button
@@ -28,19 +40,21 @@
 
     <div class="feedback" *ngIf="state() !== 'idle'">
       <ng-container *ngIf="state() === 'correct'">
-        <span class="feedback-icon">✓</span> Correct!
+        <span class="feedback-icon">✓</span> ถูกต้อง!
       </ng-container>
       <ng-container *ngIf="state() === 'wrong'">
-        <span class="feedback-icon">✕</span> The answer is "{{ correctAnswer() }}"
+        <span class="feedback-icon">✕</span> คำตอบคือ "{{ correctAnswer() }}"
       </ng-container>
     </div>
 
     <button class="submit-bar next" *ngIf="state() !== 'idle'" (click)="loadNextQuestion()">
-      Next question →
+      ข้อถัดไป →
     </button>
+    <button class="change-category" (click)="chooseAnotherCategory()">เปลี่ยนหมวดหมู่</button>
   </div>
+  </ng-template>
 
   <ng-template #loadingTpl>
-    <div class="quiz-card loading-card">Loading vocabulary...</div>
+    <div class="quiz-card loading-card">กำลังโหลดคำศัพท์...</div>
   </ng-template>
 </div>

@@ -10,8 +10,8 @@ export class WordService {
 
   constructor(private http: HttpClient) {}
 
-  getRandomQuestion(): Observable<QuizQuestion> {
-    return this.http.get<QuizQuestion>(`${this.apiUrl}/random`);
+  getRandomQuestion(category: string): Observable<QuizQuestion> {
+    return this.http.get<QuizQuestion>(`${this.apiUrl}/random`, { params: { category } });
   }
 
   checkAnswer(id: number, answer: string): Observable<CheckAnswerResponse> {

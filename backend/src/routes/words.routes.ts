@@ -1,12 +1,12 @@
 import { Router, Request, Response } from "express";
-import { hotelWords } from "../data/hotelWords";
+import { foodWords } from "../data/foodWords";
 import { WordEntry, QuizQuestion, CheckAnswerBody } from "../types";
 
 const router = Router();
-const wordList: WordEntry[] = hotelWords;
+const wordList: WordEntry[] = foodWords;
 
-function toQuestion(w: WordEntry): QuizQuestion {
-  const distractors = wordList
+function toQuestion(w: WordEntry, pool: WordEntry[]): QuizQuestion {
+  const distractors = pool
     .filter((candidate) => candidate.id !== w.id)
     .sort(() => Math.random() - 0.5)
     .slice(0, 4)
@@ -17,6 +17,8 @@ function toQuestion(w: WordEntry): QuizQuestion {
     thai: w.thai,
     pos: w.pos,
     level: w.level,
+    category: w.category,
+    image: w.image,
     choices: [w.en, ...distractors].sort(() => Math.random() - 0.5),
   };
 }
@@ -26,19 +28,22 @@ function normalize(text: string): string {
 }
 
 // GET /api/words/random -> สุ่มคำถามหนึ่งข้อ (ไม่ส่งเฉลยกลับไป)
-router.get("/random", (_req: Request, res: Response) => {
-  const random = wordList[Math.floor(Math.random() * wordList.length)];
-  res.json(toQuestion(random));
+router.get("/random", (req: Request, res: Response) => {
+  const category = req.query.category as string | undefined;
+  const pool = category ? wordList.filter((word) => word.category === category) : wordList;
+  if (pool.length < 5) return res.status(400).json({ error: "หมวดหมู่นี้มีคำศัพท์ไม่เพียงพอ" });
+  const random = pool[Math.floor(Math.random() * pool.length)];
+  res.json(toQuestion(random, pool));
 });
 
 // GET /api/words -> คำถามทั้งหมด แบบสุ่มลำดับ (เอาไว้ทำโหมดทำทีละชุด)
 router.get("/", (req: Request, res: Response) => {
-  const level = req.query.level as string | undefined;
-  const filtered = level
-    ? wordList.filter((w) => w.level.toLowerCase() === level.toLowerCase())
+  const category = req.query.category as string | undefined;
+  const filtered = category
+    ? wordList.filter((w) => w.category === category)
     : wordList;
   const shuffled = [...filtered].sort(() => Math.random() - 0.5);
-  res.json(shuffled.map(toQuestion));
+  res.json(shuffled.map((word) => toQuestion(word, filtered)));
 });
 
 // POST /api/words/check -> เช็คคำตอบ { id, answer }
