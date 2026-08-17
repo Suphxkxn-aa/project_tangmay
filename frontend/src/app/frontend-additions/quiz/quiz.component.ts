@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { WordService } from '../services/word.service';
 import { QuizQuestion } from '../services/word.model';
 
@@ -9,13 +8,13 @@ type AnswerState = 'idle' | 'correct' | 'wrong';
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css',
 })
 export class QuizComponent implements OnInit {
   question = signal<QuizQuestion | null>(null);
-  userAnswer = signal('');
+  selectedAnswer = signal('');
   state = signal<AnswerState>('idle');
   correctAnswer = signal('');
   score = signal(0);
@@ -31,7 +30,7 @@ export class QuizComponent implements OnInit {
   loadNextQuestion(): void {
     this.loading.set(true);
     this.state.set('idle');
-    this.userAnswer.set('');
+    this.selectedAnswer.set('');
     this.wordService.getRandomQuestion().subscribe({
       next: (q) => {
         this.question.set(q);
@@ -43,13 +42,14 @@ export class QuizComponent implements OnInit {
     });
   }
 
-  submitAnswer(): void {
+  submitAnswer(answer: string): void {
     const q = this.question();
-    if (!q || this.userAnswer().trim() === '' || this.state() !== 'idle') {
+    if (!q || !answer || this.state() !== 'idle') {
       return;
     }
 
-    this.wordService.checkAnswer(q.id, this.userAnswer()).subscribe((res) => {
+    this.selectedAnswer.set(answer);
+    this.wordService.checkAnswer(q.id, answer).subscribe((res) => {
       this.total.update((t) => t + 1);
       this.correctAnswer.set(res.correctAnswer);
       if (res.correct) {

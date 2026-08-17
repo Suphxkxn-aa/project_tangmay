@@ -12,6 +12,7 @@ export interface QuizQuestion {
   thai: string[];
   pos: string;
   level: string;
+  choices: string[];
 }
 
 export interface CheckAnswerBody {

@@ -9,21 +9,21 @@
 
     <h1 class="thai-word">{{ question()?.thai?.join(', ') }}</h1>
 
-    <p class="hint">พิมพ์คำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
+    <p class="hint">เลือกคำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
 
-    <div class="answer-zone">
-      <input
-        type="text"
-        class="answer-input"
-        [class.state-correct]="state() === 'correct'"
-        [class.state-wrong]="state() === 'wrong'"
-        [(ngModel)]="userAnswer"
-        [ngModelOptions]="{ standalone: true }"
+    <div class="choice-list">
+      <button
+        *ngFor="let choice of question()?.choices; let index = index"
+        type="button"
+        class="choice-button"
+        [class.selected]="selectedAnswer() === choice"
+        [class.correct]="state() !== 'idle' && choice === correctAnswer()"
+        [class.wrong]="state() === 'wrong' && selectedAnswer() === choice"
         [disabled]="state() !== 'idle'"
-        placeholder="พิมพ์ที่นี่..."
-        (keyup.enter)="submitAnswer()"
-        autofocus
-      />
+        (click)="submitAnswer(choice)"
+      >
+        <span>{{ ['A', 'B', 'C', 'D', 'E'][index] }}</span>{{ choice }}
+      </button>
     </div>
 
     <div class="feedback" *ngIf="state() !== 'idle'">
@@ -34,15 +34,6 @@
         <span class="feedback-icon">✕</span> คำตอบคือ "{{ correctAnswer() }}"
       </ng-container>
     </div>
-
-    <button
-      class="submit-bar"
-      *ngIf="state() === 'idle'"
-      (click)="submitAnswer()"
-      [disabled]="userAnswer().trim() === ''"
-    >
-      <span class="check">✓</span> ส่งคำตอบ
-    </button>
 
     <button class="submit-bar next" *ngIf="state() !== 'idle'" (click)="loadNextQuestion()">
       คำถัดไป →

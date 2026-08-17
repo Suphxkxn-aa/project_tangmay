@@ -1,12 +1,24 @@
 import { Router, Request, Response } from "express";
-import words from "../data/words.json";
+import { hotelWords } from "../data/hotelWords";
 import { WordEntry, QuizQuestion, CheckAnswerBody } from "../types";
 
 const router = Router();
-const wordList = words as WordEntry[];
+const wordList: WordEntry[] = hotelWords;
 
 function toQuestion(w: WordEntry): QuizQuestion {
-  return { id: w.id, thai: w.thai, pos: w.pos, level: w.level };
+  const distractors = wordList
+    .filter((candidate) => candidate.id !== w.id)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4)
+    .map((candidate) => candidate.en);
+
+  return {
+    id: w.id,
+    thai: w.thai,
+    pos: w.pos,
+    level: w.level,
+    choices: [w.en, ...distractors].sort(() => Math.random() - 0.5),
+  };
 }
 
 function normalize(text: string): string {

@@ -95,37 +95,40 @@
   color: var(--muted);
 }
 
-.answer-zone {
-  margin-bottom: 16px;
+.choice-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.answer-input {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid var(--line);
-  background: transparent;
-  font-size: 20px;
-  padding: 8px 4px 14px;
-  text-align: center;
+.choice-button {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 12px;
   color: var(--ink);
-  outline: none;
-  transition: border-color 0.15s ease;
-  font-family: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 16px;
+  padding: 13px 16px;
+  text-align: left;
+  transition: border-color .15s ease, background .15s ease;
 }
 
-.answer-input:focus {
-  border-bottom-color: var(--green);
+.choice-button:hover:not(:disabled), .choice-button.selected {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 8%, white);
 }
 
-.answer-input.state-correct {
-  border-bottom-color: var(--green);
+.choice-button span {
   color: var(--green-dark);
+  display: inline-block;
+  font-weight: 700;
+  width: 30px;
 }
 
-.answer-input.state-wrong {
-  border-bottom-color: var(--wrong);
-  color: var(--wrong);
-}
+.choice-button:disabled { cursor: default; }
+.choice-button.correct { border-color: var(--green); background: color-mix(in srgb, var(--green) 15%, white); }
+.choice-button.wrong { border-color: var(--wrong); background: color-mix(in srgb, var(--wrong) 12%, white); }
 
 .feedback {
   text-align: center;
