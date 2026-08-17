@@ -43,9 +43,9 @@ const baseWords = terms.map(([en, thai, category, image], index) => ({
 }));
 
 const expandedWords = terms.flatMap(([en, thai, category, image]) =>
-  descriptors.map(([descriptor, descriptorThai]) => ({
+  descriptors.map(([descriptor]) => ({
     en: `${descriptor} ${en}`,
-    thai: [`คำศัพท์ภาษาอังกฤษสำหรับ ${descriptorThai}: ${thai}`],
+    thai: [thai],
     synonyms: [], pos: "Food & Drink", level: "Standard", category, image,
   })),
 );
