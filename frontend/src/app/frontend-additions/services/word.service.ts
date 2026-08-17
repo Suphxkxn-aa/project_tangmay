@@ -6,7 +6,7 @@ import { CheckAnswerResponse, QuizQuestion } from './word.model';
 @Injectable({ providedIn: 'root' })
 export class WordService {
   // เปลี่ยนเป็น URL ของ backend จริงตอนขึ้น production
-  private readonly apiUrl = 'http://localhost:3000/api/words';
+  private readonly apiUrl = 'https://project-tangmay-backend.onrender.com/api/words';
 
   constructor(private http: HttpClient) {}
 
