@@ -1,0 +1,55 @@
+<div class="quiz-page">
+  <div class="quiz-card" *ngIf="!loading(); else loadingTpl">
+    <div class="top-row">
+      <span class="level-badge">{{ question()?.level }}</span>
+      <span class="score">{{ score() }} / {{ total() }}</span>
+    </div>
+
+    <p class="eyebrow">ความหมาย</p>
+
+    <h1 class="thai-word">{{ question()?.thai?.join(', ') }}</h1>
+
+    <p class="hint">พิมพ์คำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
+
+    <div class="answer-zone">
+      <input
+        type="text"
+        class="answer-input"
+        [class.state-correct]="state() === 'correct'"
+        [class.state-wrong]="state() === 'wrong'"
+        [(ngModel)]="userAnswer"
+        [ngModelOptions]="{ standalone: true }"
+        [disabled]="state() !== 'idle'"
+        placeholder="พิมพ์ที่นี่..."
+        (keyup.enter)="submitAnswer()"
+        autofocus
+      />
+    </div>
+
+    <div class="feedback" *ngIf="state() !== 'idle'">
+      <ng-container *ngIf="state() === 'correct'">
+        <span class="feedback-icon">✓</span> ถูกต้อง!
+      </ng-container>
+      <ng-container *ngIf="state() === 'wrong'">
+        <span class="feedback-icon">✕</span> คำตอบคือ "{{ correctAnswer() }}"
+      </ng-container>
+    </div>
+
+    <button
+      class="submit-bar"
+      *ngIf="state() === 'idle'"
+      (click)="submitAnswer()"
+      [disabled]="userAnswer().trim() === ''"
+    >
+      <span class="check">✓</span> ส่งคำตอบ
+    </button>
+
+    <button class="submit-bar next" *ngIf="state() !== 'idle'" (click)="loadNextQuestion()">
+      คำถัดไป →
+    </button>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="quiz-card loading-card">กำลังโหลดคำศัพท์...</div>
+  </ng-template>
+</div>
