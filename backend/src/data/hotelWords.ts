@@ -2,20 +2,20 @@ import { WordEntry } from "../types";
 
 type Term = readonly [string, string];
 
-// 50 core terms across front office, rooms, food and beverage, revenue,
-// events, engineering, security, and guest relations.  Each is presented in
-// ten practical hotel-work contexts, giving learners a 500-term word bank.
+// 50 foundational Food and Beverage terms for hospitality students. Each is
+// presented in ten practical learning contexts, giving learners a 500-term
+// word bank.
 const coreTerms: Term[] = [
-  ["reservation", "การสำรองห้องพัก"], ["check-in", "การเช็กอิน"], ["check-out", "การเช็กเอาต์"], ["registration", "การลงทะเบียนเข้าพัก"], ["room assignment", "การจัดสรรห้องพัก"],
-  ["key card", "คีย์การ์ด"], ["wake-up call", "บริการโทรปลุก"], ["room upgrade", "การอัปเกรดห้องพัก"], ["late check-out", "การเช็กเอาต์ล่าช้า"], ["early arrival", "การมาถึงก่อนเวลา"],
-  ["no-show", "ผู้จองที่ไม่มาเข้าพัก"], ["walk-in guest", "แขกที่เข้าพักโดยไม่จองล่วงหน้า"], ["guest folio", "ใบรายการค่าใช้จ่ายของแขก"], ["incidental charge", "ค่าใช้จ่ายเบ็ดเตล็ด"], ["cash float", "เงินทอนประจำจุดบริการ"],
-  ["night audit", "การตรวจสอบบัญชีกะกลางคืน"], ["occupancy", "อัตราการเข้าพัก"], ["average daily rate", "อัตราค่าห้องพักเฉลี่ยต่อวัน"], ["revenue management", "การบริหารรายได้"], ["rate plan", "แผนราคา"],
-  ["room inventory", "จำนวนห้องพักที่พร้อมขาย"], ["booking engine", "ระบบจองห้องพักออนไลน์"], ["channel manager", "ระบบจัดการช่องทางการขาย"], ["confirmation number", "หมายเลขยืนยันการจอง"], ["cancellation policy", "นโยบายการยกเลิก"],
-  ["housekeeping", "แผนกแม่บ้าน"], ["room attendant", "พนักงานดูแลห้องพัก"], ["turndown service", "บริการจัดเตรียมห้องก่อนนอน"], ["linen", "ผ้าลินิน"], ["laundry", "บริการซักรีด"],
-  ["amenities", "สิ่งอำนวยความสะดวกในห้องพัก"], ["minibar", "มินิบาร์"], ["lost and found", "แผนกของหายและของพบ"], ["maintenance request", "คำขอซ่อมบำรุง"], ["out-of-order room", "ห้องพักที่ใช้งานไม่ได้"],
-  ["room inspection", "การตรวจสอบห้องพัก"], ["deep cleaning", "การทำความสะอาดครั้งใหญ่"], ["stayover service", "การทำความสะอาดห้องที่แขกพักต่อ"], ["vacant clean", "ห้องว่างที่ทำความสะอาดแล้ว"], ["do not disturb", "ป้ายห้ามรบกวน"],
-  ["concierge", "พนักงานคอนเซียร์จ"], ["bell attendant", "พนักงานยกกระเป๋า"], ["luggage storage", "บริการรับฝากสัมภาระ"], ["airport transfer", "บริการรับส่งสนามบิน"], ["guest complaint", "ข้อร้องเรียนของแขก"],
-  ["service recovery", "การแก้ไขสถานการณ์บริการ"], ["guest satisfaction", "ความพึงพอใจของแขก"], ["VIP guest", "แขกวีไอพี"], ["loyalty program", "โปรแกรมสมาชิก"], ["special request", "คำขอพิเศษ"],
+  ["appetizer", "อาหารเรียกน้ำย่อย"], ["main course", "อาหารจานหลัก"], ["dessert", "ของหวาน"], ["beverage", "เครื่องดื่ม"], ["menu", "รายการอาหาร"],
+  ["à la carte", "อาหารที่สั่งแยกเป็นจาน"], ["set menu", "ชุดเมนูอาหาร"], ["buffet", "อาหารบุฟเฟต์"], ["special of the day", "เมนูพิเศษประจำวัน"], ["portion", "ปริมาณอาหารต่อหนึ่งที่"],
+  ["ingredient", "วัตถุดิบ"], ["garnish", "เครื่องตกแต่งอาหาร"], ["seasoning", "เครื่องปรุงรส"], ["allergen", "สารก่อภูมิแพ้"], ["dietary requirement", "ข้อกำหนดด้านอาหาร"],
+  ["vegetarian", "อาหารมังสวิรัติ"], ["vegan", "อาหารวีแกน"], ["gluten-free", "ปราศจากกลูเตน"], ["food allergy", "การแพ้อาหาร"], ["food intolerance", "ภาวะไม่ทนต่ออาหาร"],
+  ["reservation", "การจองโต๊ะอาหาร"], ["walk-in customer", "ลูกค้าที่เข้ามาโดยไม่จอง"], ["table assignment", "การจัดโต๊ะให้ลูกค้า"], ["table setting", "การจัดโต๊ะอาหาร"], ["place setting", "ชุดอุปกรณ์ประจำที่นั่ง"],
+  ["cutlery", "ช้อนส้อมและมีด"], ["glassware", "ภาชนะแก้ว"], ["crockery", "ภาชนะเซรามิก"], ["napkin", "ผ้าเช็ดปาก"], ["service tray", "ถาดบริการ"],
+  ["waiter", "พนักงานเสิร์ฟชาย"], ["waitress", "พนักงานเสิร์ฟหญิง"], ["host", "พนักงานต้อนรับหน้าร้าน"], ["bartender", "พนักงานผสมเครื่องดื่ม"], ["sommelier", "ผู้เชี่ยวชาญด้านไวน์"],
+  ["order taking", "การรับรายการอาหาร"], ["recommendation", "การแนะนำเมนู"], ["upselling", "การเสนอขายเมนูที่มีมูลค่าสูงขึ้น"], ["bill", "ใบเรียกเก็บเงิน"], ["service charge", "ค่าบริการ"],
+  ["food safety", "ความปลอดภัยด้านอาหาร"], ["personal hygiene", "สุขอนามัยส่วนบุคคล"], ["cross-contamination", "การปนเปื้อนข้าม"], ["temperature control", "การควบคุมอุณหภูมิ"], ["expiry date", "วันหมดอายุ"],
+  ["mise en place", "การเตรียมอุปกรณ์และวัตถุดิบก่อนบริการ"], ["food presentation", "การจัดตกแต่งอาหาร"], ["plating", "การจัดอาหารลงจาน"], ["table service", "การบริการที่โต๊ะอาหาร"], ["customer feedback", "ความคิดเห็นของลูกค้า"],
 ];
 
 const contexts: Term[] = [
@@ -29,7 +29,7 @@ export const hotelWords: WordEntry[] = coreTerms.flatMap(([term, thai], termInde
     en: `${context} ${term}`,
     synonyms: [],
     thai: [`${thai}${contextThai}`],
-    pos: "hotel term",
-    level: "Hospitality",
+    pos: "Food & Beverage term",
+    level: "F&B",
   })),
 );
