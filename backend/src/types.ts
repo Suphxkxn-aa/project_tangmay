@@ -7,6 +7,7 @@ export interface WordEntry {
   level: string;
   category: string;
   image: string;
+  hint?: string;
 }
 
 export interface QuizQuestion {
@@ -17,6 +18,7 @@ export interface QuizQuestion {
   choices: string[];
   category: string;
   image: string;
+  hint?: string;
 }
 
 export interface CheckAnswerBody {

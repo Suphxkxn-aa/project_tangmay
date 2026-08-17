@@ -19,6 +19,7 @@ function toQuestion(w: WordEntry, pool: WordEntry[]): QuizQuestion {
     level: w.level,
     category: w.category,
     image: w.image,
+    hint: w.hint,
     choices: [w.en, ...distractors].sort(() => Math.random() - 0.5),
   };
 }
@@ -30,10 +31,16 @@ function normalize(text: string): string {
 // GET /api/words/random -> สุ่มคำถามหนึ่งข้อ (ไม่ส่งเฉลยกลับไป)
 router.get("/random", (req: Request, res: Response) => {
   const category = req.query.category as string | undefined;
-  const pool = category ? wordList.filter((word) => word.category === category) : wordList;
+  const excludeIds = String(req.query.exclude ?? "")
+    .split(",")
+    .map(Number)
+    .filter(Number.isInteger);
+  const categoryPool = category ? wordList.filter((word) => word.category === category) : wordList;
+  const unseenPool = categoryPool.filter((word) => !excludeIds.includes(word.id));
+  const pool = unseenPool.length >= 5 ? unseenPool : categoryPool;
   if (pool.length < 5) return res.status(400).json({ error: "หมวดหมู่นี้มีคำศัพท์ไม่เพียงพอ" });
   const random = pool[Math.floor(Math.random() * pool.length)];
-  res.json(toQuestion(random, pool));
+  res.json(toQuestion(random, categoryPool));
 });
 
 // GET /api/words -> คำถามทั้งหมด แบบสุ่มลำดับ (เอาไว้ทำโหมดทำทีละชุด)

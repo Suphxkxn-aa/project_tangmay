@@ -46,6 +46,7 @@ const expandedWords = terms.flatMap(([en, thai, category, image]) =>
   descriptors.map(([descriptor]) => ({
     en: `${descriptor} ${en}`,
     thai: [thai],
+    hint: descriptor,
     synonyms: [], pos: "Food & Drink", level: "Standard", category, image,
   })),
 );

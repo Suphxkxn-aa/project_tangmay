@@ -119,6 +119,13 @@
   color: var(--muted);
 }
 
+.term-hint {
+  color: var(--green-dark);
+  font-size: 14px;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
 .choice-list {
   display: grid;
   gap: 10px;
