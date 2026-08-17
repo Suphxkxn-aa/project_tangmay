@@ -26,6 +26,7 @@ export class QuizComponent implements OnInit {
   score = signal(0);
   total = signal(0);
   loading = signal(true);
+  private advanceTimer?: ReturnType<typeof setTimeout>;
 
   constructor(private wordService: WordService) {}
 
@@ -34,6 +35,7 @@ export class QuizComponent implements OnInit {
   }
 
   selectCategory(category: string): void {
+    this.clearAdvanceTimer();
     this.category.set(category);
     this.score.set(0);
     this.total.set(0);
@@ -41,12 +43,21 @@ export class QuizComponent implements OnInit {
   }
 
   chooseAnotherCategory(): void {
+    this.clearAdvanceTimer();
     this.question.set(null);
     this.category.set(null);
     this.loading.set(false);
   }
 
+  private clearAdvanceTimer(): void {
+    if (this.advanceTimer) {
+      clearTimeout(this.advanceTimer);
+      this.advanceTimer = undefined;
+    }
+  }
+
   loadNextQuestion(): void {
+    this.clearAdvanceTimer();
     this.loading.set(true);
     this.state.set('idle');
     this.selectedAnswer.set('');
@@ -79,6 +90,7 @@ export class QuizComponent implements OnInit {
       } else {
         this.state.set('wrong');
       }
+      this.advanceTimer = setTimeout(() => this.loadNextQuestion(), 900);
     });
   }
 }

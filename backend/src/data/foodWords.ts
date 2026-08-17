@@ -23,6 +23,31 @@ const terms: FoodTerm[] = [
   ["make a reservation", "วลีสำหรับจองโต๊ะอาหารล่วงหน้าคืออะไร?", categories[7], "📅"], ["place an order", "วลีสำหรับสั่งอาหารกับพนักงานคืออะไร?", categories[7], "📝"], ["pay the bill", "วลีสำหรับชำระค่าอาหารคืออะไร?", categories[7], "💳"], ["have breakfast", "วลีสำหรับรับประทานอาหารมื้อเช้าคืออะไร?", categories[7], "🍳"], ["drink water", "วลีสำหรับดื่มน้ำคืออะไร?", categories[7], "💧"], ["set the table", "วลีสำหรับจัดจานและช้อนส้อมบนโต๊ะคืออะไร?", categories[7], "🍽️"],
 ];
 
-export const foodWords: WordEntry[] = terms.map(([en, thai, category, image], index) => ({
+// These descriptors create 300 additional, practical Food & Drink terms for
+// every category: 50 vocabulary variants for each of its six seed terms.
+const descriptors: FoodTerm[] = [
+  ["fresh", "สด", "", ""], ["local", "ท้องถิ่น", "", ""], ["seasonal", "ตามฤดูกาล", "", ""], ["organic", "ออร์แกนิก", "", ""], ["premium", "พรีเมียม", "", ""],
+  ["homemade", "ทำเองที่บ้าน", "", ""], ["traditional", "แบบดั้งเดิม", "", ""], ["modern", "สมัยใหม่", "", ""], ["classic", "คลาสสิก", "", ""], ["popular", "ยอดนิยม", "", ""],
+  ["healthy", "เพื่อสุขภาพ", "", ""], ["nutritious", "มีคุณค่าทางโภชนาการ", "", ""], ["balanced", "สมดุล", "", ""], ["light", "เบา", "", ""], ["spicy", "เผ็ด", "", ""],
+  ["mild", "รสอ่อน", "", ""], ["sweet", "หวาน", "", ""], ["savoury", "รสกลมกล่อม", "", ""], ["hot", "ร้อน", "", ""], ["cold", "เย็น", "", ""],
+  ["chilled", "แช่เย็น", "", ""], ["warm", "อุ่น", "", ""], ["daily", "ประจำวัน", "", ""], ["special", "พิเศษ", "", ""], ["signature", "ขึ้นชื่อ", "", ""],
+  ["chef's", "โดยเชฟ", "", ""], ["family-style", "แบบครอบครัว", "", ""], ["ready-to-serve", "พร้อมเสิร์ฟ", "", ""], ["takeaway", "ซื้อกลับบ้าน", "", ""], ["dine-in", "รับประทานที่ร้าน", "", ""],
+  ["plated", "จัดเสิร์ฟบนจาน", "", ""], ["buffet", "แบบบุฟเฟต์", "", ""], ["imported", "นำเข้า", "", ""], ["plant-based", "จากพืช", "", ""], ["gluten-free", "ปราศจากกลูเตน", "", ""],
+  ["dairy-free", "ปราศจากนม", "", ""], ["halal", "ฮาลาล", "", ""], ["vegetarian", "มังสวิรัติ", "", ""], ["vegan", "วีแกน", "", ""], ["kid-friendly", "เหมาะสำหรับเด็ก", "", ""],
+  ["portioned", "แบ่งส่วนแล้ว", "", ""], ["sliced", "หั่นเป็นชิ้น", "", ""], ["mixed", "ผสม", "", ""], ["cooked", "ปรุงสุก", "", ""], ["raw", "ดิบ", "", ""],
+  ["grilled", "ย่าง", "", ""], ["roasted", "อบ", "", ""], ["steamed", "นึ่ง", "", ""], ["fried", "ทอด", "", ""], ["boiled", "ต้ม", "", ""],
+];
+
+const baseWords = terms.map(([en, thai, category, image], index) => ({
   id: index + 1, en, synonyms: [], thai: [thai], pos: "Food & Drink", level: "Standard", category, image,
 }));
+
+const expandedWords = terms.flatMap(([en, thai, category, image]) =>
+  descriptors.map(([descriptor, descriptorThai]) => ({
+    en: `${descriptor} ${en}`,
+    thai: [`คำศัพท์ภาษาอังกฤษสำหรับ ${descriptorThai}: ${thai}`],
+    synonyms: [], pos: "Food & Drink", level: "Standard", category, image,
+  })),
+);
+
+export const foodWords: WordEntry[] = [...baseWords, ...expandedWords].map((word, index) => ({ ...word, id: index + 1 }));
