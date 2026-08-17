@@ -5,11 +5,11 @@
       <span class="score">{{ score() }} / {{ total() }}</span>
     </div>
 
-    <p class="eyebrow">ความหมาย</p>
+    <p class="eyebrow">Definition</p>
 
     <h1 class="thai-word">{{ question()?.thai?.join(', ') }}</h1>
 
-    <p class="hint">เลือกคำศัพท์ภาษาอังกฤษที่ตรงกับความหมายนี้</p>
+    <p class="hint">Choose the Food &amp; Drink term that matches this definition.</p>
 
     <div class="choice-list">
       <button
@@ -28,19 +28,19 @@
 
     <div class="feedback" *ngIf="state() !== 'idle'">
       <ng-container *ngIf="state() === 'correct'">
-        <span class="feedback-icon">✓</span> ถูกต้อง!
+        <span class="feedback-icon">✓</span> Correct!
       </ng-container>
       <ng-container *ngIf="state() === 'wrong'">
-        <span class="feedback-icon">✕</span> คำตอบคือ "{{ correctAnswer() }}"
+        <span class="feedback-icon">✕</span> The answer is "{{ correctAnswer() }}"
       </ng-container>
     </div>
 
     <button class="submit-bar next" *ngIf="state() !== 'idle'" (click)="loadNextQuestion()">
-      คำถัดไป →
+      Next question →
     </button>
   </div>
 
   <ng-template #loadingTpl>
-    <div class="quiz-card loading-card">กำลังโหลดคำศัพท์...</div>
+    <div class="quiz-card loading-card">Loading vocabulary...</div>
   </ng-template>
 </div>
